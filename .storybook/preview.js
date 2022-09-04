@@ -4,7 +4,7 @@ import { theme } from '../src/themes'
 import * as NextImage from 'next/image'
 
 export const parameters = {
-  actions: { argTypesRegex: "^on[A-Z].*" },
+  actions: { argTypesRegex: '^on[A-Z].*' },
   controls: {
     matchers: {
       color: /(background|color)$/i,
@@ -32,6 +32,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 `
 
+// Themeの適用
 addDecorator((story) => (
   <ThemeProvider theme={theme}>
     <GlobalStyle />
@@ -39,6 +40,7 @@ addDecorator((story) => (
   </ThemeProvider>
 ))
 
+// next/imageの差し替え
 const OriginalNextImage = NextImage.default;
 
 Object.defineProperty(NextImage, 'default', {
@@ -48,9 +50,4 @@ Object.defineProperty(NextImage, 'default', {
   ) : (
     <OriginalNextImage {...props} unoptimized />
   ),
-})
-
-Object.defineProperty(NextImage, '__esModule', {
-  configurable: true,
-  value: true,
 })
